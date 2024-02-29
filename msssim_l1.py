@@ -1,9 +1,10 @@
 class MS_SSIM_L1_LOSS(nn.Module):
     """
     Created on Thu Dec  3 00:28:15 2020
-
+    Modified on Wed Feb 38 20:19:10 2024
+    
     @orig-author for 3C: Yunpeng Li, Tianjin University
-    @orig-author for 1C: William Jongwon Han, Carnegie Mellon University
+    @modified-author for 1C: William Jongwon Han, Carnegie Mellon University
     """
     # Have to use cuda, otherwise the speed is too slow.
     def __init__(self, gaussian_sigmas=[0.5, 1.0, 2.0, 4.0, 8.0],
