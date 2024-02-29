@@ -23,7 +23,7 @@ class MS_SSIM_L1_LOSS(nn.Module):
         
         g_masks = torch.zeros((1*len(gaussian_sigmas), 1, filter_size, filter_size))
         for idx, sigma in enumerate(gaussian_sigmas):
-            # r0,g0,b0,r1,g1,b1,...,rM,gM,bM
+            # r0,g0,b0
             g_masks[1*idx+0, 0, :, :] = self._fspecial_gauss_2d(filter_size, sigma)
         self.g_masks = g_masks.to(device)
 
