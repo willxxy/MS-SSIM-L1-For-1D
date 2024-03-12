@@ -59,7 +59,7 @@ class MS_SSIM_L1_LOSS(nn.Module):
         gaussian_vec = self._fspecial_gauss_1d(size, sigma)
         return torch.outer(gaussian_vec, gaussian_vec)
 
-    def forward(self, x, y):
+    def forward(self, x, y, mask = None):
         b, c, h, w = x.shape
         mux = F.conv2d(x, self.g_masks, groups=1, padding=self.pad)
         muy = F.conv2d(y, self.g_masks, groups=1, padding=self.pad)
@@ -87,5 +87,6 @@ class MS_SSIM_L1_LOSS(nn.Module):
 
         loss_mix = self.alpha * loss_ms_ssim + (1 - self.alpha) * gaussian_l1 / self.DR
         loss_mix = self.compensation*loss_mix
+        loss_mix = loss_mix * mask
 
         return loss_mix.mean()
